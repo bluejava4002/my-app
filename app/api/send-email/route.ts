@@ -1,18 +1,14 @@
-import { emailQueue } from '@/lib/queue'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
   const { email, name } = await request.json()
 
-  // Ajoute un job dans la queue
-  await emailQueue.add('welcome-email', {
-    email,
-    name,
-    sentAt: new Date().toISOString()
-  })
+  await new Promise(resolve => setTimeout(resolve, 1000))
 
-  return NextResponse.json({ 
-    success: true, 
-    message: `Email en attente d'envoi pour ${email}` 
+  console.log(`Email simulé envoyé à ${email} (${name})`)
+
+  return NextResponse.json({
+    success: true,
+    message: "Email envoyé !"
   })
 }
