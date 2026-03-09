@@ -17,13 +17,13 @@ export default function Signup() {
     setLoading(true)
     setError("")
 
-    const { error } = await supabase.auth.signUp({
+    const { error: authError } = await supabase.auth.signUp({
       email,
       password
     })
 
-    if (error) {
-      setError(error.message)
+    if (authError) {
+      setError(authError.message)
     } else {
       setSuccess(true)
     }

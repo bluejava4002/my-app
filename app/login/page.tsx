@@ -18,12 +18,12 @@ export default function Login() {
     setLoading(true)
     setError("")
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error: authError } = await supabase.auth.signInWithPassword({
       email,
       password
     })
 
-    if (error) {
+    if (authError) {
       setError("Email ou mot de passe incorrect")
     } else {
       router.push("/")
